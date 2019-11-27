@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:tcp="http://www.mulesoft.org/schema/mule/tcp" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/tcp http://www.mulesoft.org/schema/mule/tcp/current/mule-tcp.xsd">
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <tcp:connector name="TCP" validateConnections="true" sendBufferSize="0" receiveBufferSize="0" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="TCP"/>
     <flow name="frontend">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
         <http:static-resource-handler resourceBase="${app.home}/docroot" doc:name="HTTP Static Resource Handler"/>
@@ -19,6 +21,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <choice doc:name="Decide cartão">
 			<when expression="#[payload.numero.substring(0, 1) == '4' &amp;&amp; payload.numero.length() == 16]">
 				<component doc:name="Tratamento Visa" class="br.ufsc.das.ProcessamentoVisa"/>
+                <serializable-to-byte-array-transformer doc:name="Serializable to Byte Array"/>
+                <logger message="#[message]" level="INFO" doc:name="Logger"/>
+                <tcp:outbound-endpoint exchange-pattern="request-response" host="localhost" port="8090" connector-ref="TCP" responseTimeout="10000" doc:name="TCP"/>
+                <logger message="#[message]" level="INFO" doc:name="Logger"/>
+                <byte-array-to-serializable-transformer doc:name="Byte Array to Serializable"/>
+                <logger message="#[message]" level="INFO" doc:name="Logger"/>
 			</when>
 			<when expression="#[Integer.parseInt(payload.numero.substring(0,2)) &gt;= 51 &amp;&amp; Integer.parseInt(payload.numero.substring(0,2)) &lt;= 55 &amp;&amp; payload.numero.length() == 16]">
 				<component doc:name="Tratamento Mastercard" class="br.ufsc.das.ProcessamentoMastercard"> </component>
@@ -27,7 +35,6 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 				<component doc:name="Exceção Cartão não reconhecido" class="br.ufsc.das.LancarExcecaoCartaoNaoReconhecido"> </component>
 			</otherwise>
 		</choice>
-        <json:object-to-json-transformer mimeType="text/json" doc:name="Object to JSON"/>
         <catch-exception-strategy doc:name="Catch Exception Strategy">
 			<set-payload value="Ocorreu um erro processando requisão -> #[exception.cause]" doc:name="Set Payload" encoding="UTF-8" mimeType="text/plain"/>
 		</catch-exception-strategy>
