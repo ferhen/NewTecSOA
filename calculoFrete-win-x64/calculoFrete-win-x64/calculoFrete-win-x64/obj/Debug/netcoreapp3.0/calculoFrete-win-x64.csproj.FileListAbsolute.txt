@@ -1,0 +1,11 @@
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\bin\Debug\netcoreapp3.0\calculoFrete-win-x64.exe
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\bin\Debug\netcoreapp3.0\calculoFrete-win-x64.deps.json
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\bin\Debug\netcoreapp3.0\calculoFrete-win-x64.runtimeconfig.json
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\bin\Debug\netcoreapp3.0\calculoFrete-win-x64.runtimeconfig.dev.json
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\bin\Debug\netcoreapp3.0\calculoFrete-win-x64.dll
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\bin\Debug\netcoreapp3.0\calculoFrete-win-x64.pdb
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\obj\Debug\netcoreapp3.0\calculoFrete-win-x64.csprojAssemblyReference.cache
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\obj\Debug\netcoreapp3.0\calculoFrete-win-x64.AssemblyInfoInputs.cache
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\obj\Debug\netcoreapp3.0\calculoFrete-win-x64.AssemblyInfo.cs
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\obj\Debug\netcoreapp3.0\calculoFrete-win-x64.dll
+C:\Users\gabrielm\Documents\Trabalho SOA\calculoFrete-win-x64\calculoFrete-win-x64\calculoFrete-win-x64\obj\Debug\netcoreapp3.0\calculoFrete-win-x64.pdb
