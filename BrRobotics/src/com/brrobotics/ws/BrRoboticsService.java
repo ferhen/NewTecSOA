@@ -46,7 +46,7 @@ public class BrRoboticsService {
         pedido.setTotalRoboMedico(totalRoboMedico);
         pedido.setTotalRoboSeguranca(totalRoboSeguranca);
 
-        pedido.setTotal(totalRoboDomestico + totalRoboMedico + totalRoboSeguranca);
+        pedido.setTotal(0.85 * (totalRoboDomestico + totalRoboMedico + totalRoboSeguranca));
 
         pedido = dao.insert(pedido);
 
