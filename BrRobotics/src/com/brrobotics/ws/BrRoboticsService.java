@@ -36,10 +36,10 @@ public class BrRoboticsService {
         	totalRoboDomestico = 0.75 * totalRoboDomestico;
         }
         if (pedido.getQtdRoboMedico() > 3) {
-        	totalRoboMedico = 0.85 * totalRoboMedico;
+        	totalRoboMedico = 0.9 * totalRoboMedico;
         } 
         if (pedido.getQtdRoboSeguranca() > 3) {
-        	totalRoboSeguranca = 0.9 * totalRoboSeguranca;
+        	totalRoboSeguranca = 0.85 * totalRoboSeguranca;
         }
         
         pedido.setTotalRoboDomestico(totalRoboDomestico);

@@ -19,11 +19,11 @@ public class Cardapio {
 
         rob = new Robo(1, "Robo Domestico", "Para automatiza a limpesa da casa, processar o lixo e lavar a louça",800.0);
         this.cardapio.add(rob);
-        rob = new Robo(2, "Robo Seguranca", "Para vigiar a casa e expantar intrusos", 1500.0);
+        rob = new Robo(2, "Robo Medico", "Para cuidar de você quando estiver doente", 2000.0);
         this.cardapio.add(rob);
-        rob = new Robo(3, "Robo Medico", "Para cuidar de você quando estiver doente", 2000.0);
+        rob = new Robo(3, "Robo Seguranca", "Para vigiar a casa e espantar intrusos", 1500.0);
         this.cardapio.add(rob);
-        
+    
     }
 
     public List<Robo> getCardapio() {
