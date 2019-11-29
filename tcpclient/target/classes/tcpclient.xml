@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:wmq="http://www.mulesoft.org/schema/mule/ee/wmq" xmlns:tcp="http://www.mulesoft.org/schema/mule/tcp" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/tcp http://www.mulesoft.org/schema/mule/tcp/current/mule-tcp.xsd
+http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/ee/wmq/current/mule-wmq-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <tcp:connector name="TCP" validateConnections="true" sendBufferSize="1024" receiveBufferSize="1024" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="TCP">
+        <tcp:xml-eof-protocol/>
+    </tcp:connector>
+    <flow name="tcpclientFlow1">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
+        <http:static-resource-handler resourceBase="${app.home}/docroot" doc:name="HTTP Static Resource Handler"/>
+    </flow>
+    <flow name="tcpclientFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/tratarForm" doc:name="HTTP"/>
+        <component class="ufsc.br.das.Tratamento" doc:name="Java"/>
+        <set-session-variable variableName="cartaoCredito" value="#[payload]" mimeType="text/plain" doc:name="Session Variable"/>
+        <set-payload value="PAY#[System.getProperty('line.separator')]
+" mimeType="text/plain" doc:name="Set Payload"/>
+        <tcp:outbound-endpoint exchange-pattern="request-response" host="localhost" port="13000" responseTimeout="10000" doc:name="TCP" connector-ref="TCP"/>
+        <byte-array-to-string-transformer mimeType="text/plain" doc:name="Byte Array to String"/>
+        <choice doc:name="Choice">
+            <when expression="#[payload == &quot;OK&quot;]">
+                <set-payload value="#[sessionVars.cartaoCredito.numero]#[System.getProperty('line.separator')]" doc:name="Set Payload"/>
+                <tcp:outbound-endpoint exchange-pattern="request-response" host="localhost" port="13000" connector-ref="TCP" responseTimeout="10000" doc:name="TCP"/>
+                <byte-array-to-string-transformer mimeType="text/plain" doc:name="Byte Array to String"/>
+            </when>
+        </choice>
+    </flow>
+</mule>
