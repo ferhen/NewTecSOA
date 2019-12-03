@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <http:request-config name="HTTP_BrRobotics" host="127.0.0.1" port="8080" doc:name="HTTP Request Configuration"/>
+    <flow name="ws-rest2Flow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
+        <http:static-resource-handler resourceBase="${app.home}/docroot" doc:name="HTTP Static Resource Handler"/>
+    </flow>
+    <flow name="ws-rest2Flow1">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/tratarForm" doc:name="HTTP"/>
+        <component class="br.ufsc.das.Tratamento" doc:name="Java"/>
+        <enricher doc:name="Message Enricher">
+            <processor-chain doc:name="Processor Chain">
+                <dw:transform-message doc:name="Transform Message">
+                    <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	cliente: payload.cliente,
+	endereco: payload.endereco,
+	estado: payload.estado,
+	qtdRoboDomestico: payload.qtdRoboDomestico,
+	qtdRoboMedico: payload.qtdRoboMedico,
+	qtdRoboSeguranca: payload.qtdRoboSeguranca
+}]]></dw:set-payload>
+                </dw:transform-message>
+                <http:request config-ref="HTTP_BrRobotics" path="/BrRobotics/rest/BrRoboticsService/inserirPedido" method="POST" doc:name="HTTP"/>
+            </processor-chain>
+            <enrich source="#[json:codigo]" target="#[payload.codigo]"/>
+            <enrich source="#[json:total]" target="#[payload.total]"/>
+        </enricher>
+        <object-to-string-transformer mimeType="text/plain" doc:name="Object to String"/>
+    </flow>
+</mule>
