@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:rmi="http://www.mulesoft.org/schema/mule/rmi" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/rmi http://www.mulesoft.org/schema/mule/rmi/current/mule-rmi.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8082" doc:name="HTTP Listener Configuration"/>
+    <rmi:connector name="RMI" securityPolicy="${app.home}/java_policy" validateConnections="true" jndiInitialFactory="com.sun.jndi.rmi.registry.RegistryContextFactory" jndiProviderUrl="rmi://127.0.0.1:11099" doc:name="RMI"/>
+    <flow name="calculocomissaotestFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
+        <http:static-resource-handler resourceBase="${app.home}/docroot" doc:name="HTTP Static Resource Handler"/>
+    </flow>
+    <flow name="calculocomissaotestFlow1">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/tratarForm" doc:name="HTTP"/>
+        <component class="br.ufsc.das.Tratamento" doc:name="Java"/>
+        <rmi:outbound-endpoint exchange-pattern="request-response"    method="calcularValorComComissao" methodArgumentTypes="float" responseTimeout="10000" doc:name="RMI" address="rmi://127.0.0.1/CalculoComissaoService" connector-ref="RMI" />
+        <response>
+            <object-to-string-transformer mimeType="text/plain" doc:name="Object to String"/>
+        </response>
+    </flow>
+</mule>
