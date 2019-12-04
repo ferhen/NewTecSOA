@@ -1,0 +1,210 @@
+2019-12-04 03:08:01,834 [main] INFO  org.mule.module.launcher.application.DefaultMuleApplication - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Initializing app 'TCPClient'                             +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2019-12-04 03:08:02,190 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Initialising RegistryBroker
+2019-12-04 03:08:02,309 [main] INFO  org.mule.module.extension.internal.manager.DefaultExtensionManager - Starting discovery of extensions
+2019-12-04 03:08:02,401 [main] INFO  org.mule.module.extension.internal.manager.DefaultExtensionManager - Discovered 1 extensions
+2019-12-04 03:08:02,401 [main] INFO  org.mule.module.extension.internal.manager.DefaultExtensionManager - Registering extension validation (version 3.9)
+2019-12-04 03:08:02,611 [main] INFO  org.mule.config.spring.MuleArtifactContext - Refreshing org.mule.config.spring.MuleArtifactContext@4a9e6faf: startup date [Wed Dec 04 03:08:02 BRT 2019]; root of context hierarchy
+2019-12-04 03:08:03,431 [main] WARN  org.mule.config.spring.parsers.specific.MessageProcessorDefinitionParser - Schema warning: Use of element <static-resource-handler> is deprecated.  HTTP transport is deprecated and will be removed in Mule 4.0. Use HTTP module instead..
+2019-12-04 03:08:03,710 [main] INFO  org.mule.config.spring.processors.NoDevkitInjectorProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-12-04 03:08:04,294 [main] WARN  org.springframework.beans.GenericTypeAwarePropertyDescriptor - Invalid JavaBean property 'port' being accessed! Ambiguous write methods found next to actually used [public void org.mule.endpoint.URIBuilder.setPort(java.lang.String)]: [public void org.mule.endpoint.URIBuilder.setPort(int)]
+2019-12-04 03:08:04,709 [main] WARN  org.mule.module.ognl.expression.OgnlExpressionEvaluator - OGNL module is deprecated and will be removed in Mule 4.0. Use MEL expressions instead.
+2019-12-04 03:08:04,976 [main] INFO  org.mule.util.journal.TransactionJournal - Using files for tx logs C:\Projects\NewTecSOA\.mule\.\.mule\TCPClient\queue-tx-log\tx1.log and C:\Projects\NewTecSOA\.mule\.\.mule\TCPClient\queue-tx-log\tx2.log
+2019-12-04 03:08:05,022 [main] INFO  org.mule.util.journal.TransactionJournal - Using files for tx logs C:\Projects\NewTecSOA\.mule\.\.mule\TCPClient\queue-xa-tx-log\tx1.log and C:\Projects\NewTecSOA\.mule\.\.mule\TCPClient\queue-xa-tx-log\tx2.log
+2019-12-04 03:08:05,036 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Initialising connector: TCP
+2019-12-04 03:08:05,375 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Initialising model: _muleSystemModel
+2019-12-04 03:08:05,379 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Initialising flow: inputsFlow
+2019-12-04 03:08:05,379 [main] INFO  org.mule.exception.DefaultMessagingExceptionStrategy - Initialising exception listener: org.mule.exception.DefaultMessagingExceptionStrategy@46e3559f
+2019-12-04 03:08:05,411 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Initialising service: inputsFlow.stage1
+2019-12-04 03:08:05,424 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Initialising flow: mainFlow
+2019-12-04 03:08:05,424 [main] INFO  org.mule.exception.CatchMessagingExceptionStrategy - Initialising exception listener: org.mule.exception.CatchMessagingExceptionStrategy@661fe025
+2019-12-04 03:08:05,429 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Initialising service: mainFlow.stage1
+2019-12-04 03:08:05,429 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.1961232715
+2019-12-04 03:08:05,431 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.765880900
+2019-12-04 03:08:05,432 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Initialising flow: mastercardFlow
+2019-12-04 03:08:05,432 [main] INFO  org.mule.exception.DefaultMessagingExceptionStrategy - Initialising exception listener: org.mule.exception.DefaultMessagingExceptionStrategy@2b4d4327
+2019-12-04 03:08:05,438 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Initialising service: mastercardFlow.stage1
+2019-12-04 03:08:05,438 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.265629779
+2019-12-04 03:08:05,439 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Initialising flow: visaFlow
+2019-12-04 03:08:05,439 [main] INFO  org.mule.exception.CatchMessagingExceptionStrategy - Initialising exception listener: org.mule.exception.CatchMessagingExceptionStrategy@1526f71
+2019-12-04 03:08:05,442 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Initialising service: visaFlow.stage1
+2019-12-04 03:08:05,443 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.1979825302
+2019-12-04 03:08:05,736 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.1141059550
+2019-12-04 03:08:05,736 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.1996787860
+2019-12-04 03:08:05,736 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.249109901
+2019-12-04 03:08:05,736 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.215638041
+2019-12-04 03:08:05,737 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.485542604
+2019-12-04 03:08:05,935 [main] INFO  org.mule.config.spring.SpringXmlConfigurationBuilder - Configured Mule using "org.mule.config.spring.SpringXmlConfigurationBuilder" with configuration resource(s): "[ConfigResource{resourceName='C:\Projects\NewTecSOA\.mule\apps\TCPClient\tcpclient.xml'}]"
+2019-12-04 03:08:05,935 [main] INFO  org.mule.config.builders.AutoConfigurationBuilder - Configured Mule using "org.mule.config.builders.AutoConfigurationBuilder" with configuration resource(s): "[ConfigResource{resourceName='C:\Projects\NewTecSOA\.mule\apps\TCPClient\tcpclient.xml'}]"
+2019-12-04 03:08:05,940 [main] INFO  com.mulesoft.module.policies.lifecyle.GateKeeper - GateKeeper Mode: DISABLED
+2019-12-04 03:08:05,944 [main] INFO  org.mule.module.launcher.application.DefaultMuleApplication - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Starting app 'TCPClient'                                 +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2019-12-04 03:08:05,959 [main] INFO  org.mule.util.queue.QueueXaResourceManager - Starting ResourceManager
+2019-12-04 03:08:05,959 [main] INFO  org.mule.util.queue.QueueXaResourceManager - Started ResourceManager
+2019-12-04 03:08:05,989 [main] INFO  org.mule.module.http.internal.listener.DefaultHttpListenerConfig - Listening for requests on http://0.0.0.0:8081
+2019-12-04 03:08:05,991 [main] INFO  org.mule.transport.tcp.TcpConnector - Connected: TcpConnector
+{
+  name=TCP
+  lifecycle=initialise
+  this=7d986d83
+  numberOfConcurrentTransactedReceivers=4
+  createMultipleTransactedReceivers=true
+  connected=true
+  supportedProtocols=[tcp]
+  serviceOverrides=<none>
+}
+
+2019-12-04 03:08:05,991 [main] INFO  org.mule.transport.tcp.TcpConnector - Starting: TcpConnector
+{
+  name=TCP
+  lifecycle=initialise
+  this=7d986d83
+  numberOfConcurrentTransactedReceivers=4
+  createMultipleTransactedReceivers=true
+  connected=true
+  supportedProtocols=[tcp]
+  serviceOverrides=<none>
+}
+
+2019-12-04 03:08:05,992 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Starting connector: TCP
+2019-12-04 03:08:05,997 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Starting model: _muleSystemModel
+2019-12-04 03:08:05,999 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Starting flow: inputsFlow
+2019-12-04 03:08:05,999 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Starting service: inputsFlow.stage1
+2019-12-04 03:08:06,003 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Starting flow: mainFlow
+2019-12-04 03:08:06,003 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Starting service: mainFlow.stage1
+2019-12-04 03:08:06,006 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.1961232715
+2019-12-04 03:08:06,010 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.765880900
+2019-12-04 03:08:06,010 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Starting flow: mastercardFlow
+2019-12-04 03:08:06,010 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Starting service: mastercardFlow.stage1
+2019-12-04 03:08:06,012 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.265629779
+2019-12-04 03:08:06,013 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Starting flow: visaFlow
+2019-12-04 03:08:06,013 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Starting service: visaFlow.stage1
+2019-12-04 03:08:06,015 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.1979825302
+2019-12-04 03:08:06,015 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.1141059550
+2019-12-04 03:08:06,015 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.1996787860
+2019-12-04 03:08:06,015 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.249109901
+2019-12-04 03:08:06,016 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.215638041
+2019-12-04 03:08:06,016 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.485542604
+2019-12-04 03:08:06,051 [main] INFO  org.mule.module.management.agent.WrapperManagerAgent - This JVM hasn't been launched by the wrapper, the agent will not run.
+2019-12-04 03:08:06,086 [main] INFO  org.mule.module.management.agent.AbstractJmxAgent - Registered Connector Service with name Mule.TCPClient:type=Connector,name="TCP"
+2019-12-04 03:08:06,092 [main] INFO  org.mule.DefaultMuleContext - 
+**********************************************************************
+* Application: TCPClient                                             *
+* OS encoding: \, Mule encoding: UTF-8                               *
+*                                                                    *
+* Agents Running:                                                    *
+*   Batch module default engine                                      *
+*   JMX Agent                                                        *
+*   Wrapper Manager                                                  *
+**********************************************************************
+2019-12-04 03:09:40,029 [main] INFO  org.mule.module.launcher.application.DefaultMuleApplication - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Initializing app 'tcpclient'                             +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2019-12-04 03:09:40,375 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Initialising RegistryBroker
+2019-12-04 03:09:40,530 [main] INFO  org.mule.module.extension.internal.manager.DefaultExtensionManager - Starting discovery of extensions
+2019-12-04 03:09:40,622 [main] INFO  org.mule.module.extension.internal.manager.DefaultExtensionManager - Discovered 1 extensions
+2019-12-04 03:09:40,622 [main] INFO  org.mule.module.extension.internal.manager.DefaultExtensionManager - Registering extension validation (version 3.9)
+2019-12-04 03:09:40,838 [main] INFO  org.mule.config.spring.MuleArtifactContext - Refreshing org.mule.config.spring.MuleArtifactContext@4a9e6faf: startup date [Wed Dec 04 03:09:40 BRT 2019]; root of context hierarchy
+2019-12-04 03:09:41,645 [main] WARN  org.mule.config.spring.parsers.specific.MessageProcessorDefinitionParser - Schema warning: Use of element <static-resource-handler> is deprecated.  HTTP transport is deprecated and will be removed in Mule 4.0. Use HTTP module instead..
+2019-12-04 03:09:41,873 [main] INFO  org.mule.config.spring.processors.NoDevkitInjectorProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2019-12-04 03:09:42,413 [main] WARN  org.springframework.beans.GenericTypeAwarePropertyDescriptor - Invalid JavaBean property 'port' being accessed! Ambiguous write methods found next to actually used [public void org.mule.endpoint.URIBuilder.setPort(java.lang.String)]: [public void org.mule.endpoint.URIBuilder.setPort(int)]
+2019-12-04 03:09:42,806 [main] WARN  org.mule.module.ognl.expression.OgnlExpressionEvaluator - OGNL module is deprecated and will be removed in Mule 4.0. Use MEL expressions instead.
+2019-12-04 03:09:43,035 [main] INFO  org.mule.util.journal.TransactionJournal - Using files for tx logs C:\Projects\NewTecSOA\.mule\.\.mule\tcpclient\queue-tx-log\tx1.log and C:\Projects\NewTecSOA\.mule\.\.mule\tcpclient\queue-tx-log\tx2.log
+2019-12-04 03:09:43,047 [main] INFO  org.mule.util.journal.TransactionJournal - Using files for tx logs C:\Projects\NewTecSOA\.mule\.\.mule\tcpclient\queue-xa-tx-log\tx1.log and C:\Projects\NewTecSOA\.mule\.\.mule\tcpclient\queue-xa-tx-log\tx2.log
+2019-12-04 03:09:43,052 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Initialising connector: TCP
+2019-12-04 03:09:43,349 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Initialising model: _muleSystemModel
+2019-12-04 03:09:43,353 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Initialising flow: inputsFlow
+2019-12-04 03:09:43,353 [main] INFO  org.mule.exception.DefaultMessagingExceptionStrategy - Initialising exception listener: org.mule.exception.DefaultMessagingExceptionStrategy@1ddc6db2
+2019-12-04 03:09:43,383 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Initialising service: inputsFlow.stage1
+2019-12-04 03:09:43,393 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Initialising flow: mainFlow
+2019-12-04 03:09:43,393 [main] INFO  org.mule.exception.CatchMessagingExceptionStrategy - Initialising exception listener: org.mule.exception.CatchMessagingExceptionStrategy@7b1e5e55
+2019-12-04 03:09:43,396 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Initialising service: mainFlow.stage1
+2019-12-04 03:09:43,397 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.1961232715
+2019-12-04 03:09:43,398 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.765880900
+2019-12-04 03:09:43,398 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Initialising flow: mastercardFlow
+2019-12-04 03:09:43,398 [main] INFO  org.mule.exception.DefaultMessagingExceptionStrategy - Initialising exception listener: org.mule.exception.DefaultMessagingExceptionStrategy@5dc769f9
+2019-12-04 03:09:43,406 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Initialising service: mastercardFlow.stage1
+2019-12-04 03:09:43,406 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.265629779
+2019-12-04 03:09:43,407 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Initialising flow: visaFlow
+2019-12-04 03:09:43,407 [main] INFO  org.mule.exception.CatchMessagingExceptionStrategy - Initialising exception listener: org.mule.exception.CatchMessagingExceptionStrategy@49fb0bbd
+2019-12-04 03:09:43,410 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Initialising service: visaFlow.stage1
+2019-12-04 03:09:43,412 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.1979825302
+2019-12-04 03:09:43,685 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.1141059550
+2019-12-04 03:09:43,685 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.1996787860
+2019-12-04 03:09:43,685 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.249109901
+2019-12-04 03:09:43,685 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.215638041
+2019-12-04 03:09:43,685 [main] INFO  org.mule.component.ComponentLifecycleManager - Initialising component: component.485542604
+2019-12-04 03:09:43,880 [main] INFO  org.mule.config.spring.SpringXmlConfigurationBuilder - Configured Mule using "org.mule.config.spring.SpringXmlConfigurationBuilder" with configuration resource(s): "[ConfigResource{resourceName='C:\Projects\NewTecSOA\.mule\apps\tcpclient\tcpclient.xml'}]"
+2019-12-04 03:09:43,880 [main] INFO  org.mule.config.builders.AutoConfigurationBuilder - Configured Mule using "org.mule.config.builders.AutoConfigurationBuilder" with configuration resource(s): "[ConfigResource{resourceName='C:\Projects\NewTecSOA\.mule\apps\tcpclient\tcpclient.xml'}]"
+2019-12-04 03:09:43,884 [main] INFO  com.mulesoft.module.policies.lifecyle.GateKeeper - GateKeeper Mode: DISABLED
+2019-12-04 03:09:43,888 [main] INFO  org.mule.module.launcher.application.DefaultMuleApplication - 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Starting app 'tcpclient'                                 +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2019-12-04 03:09:43,899 [main] INFO  org.mule.util.queue.QueueXaResourceManager - Starting ResourceManager
+2019-12-04 03:09:43,899 [main] INFO  org.mule.util.queue.QueueXaResourceManager - Started ResourceManager
+2019-12-04 03:09:43,928 [main] INFO  org.mule.module.http.internal.listener.DefaultHttpListenerConfig - Listening for requests on http://0.0.0.0:8081
+2019-12-04 03:09:43,930 [main] INFO  org.mule.transport.tcp.TcpConnector - Connected: TcpConnector
+{
+  name=TCP
+  lifecycle=initialise
+  this=12a470dd
+  numberOfConcurrentTransactedReceivers=4
+  createMultipleTransactedReceivers=true
+  connected=true
+  supportedProtocols=[tcp]
+  serviceOverrides=<none>
+}
+
+2019-12-04 03:09:43,930 [main] INFO  org.mule.transport.tcp.TcpConnector - Starting: TcpConnector
+{
+  name=TCP
+  lifecycle=initialise
+  this=12a470dd
+  numberOfConcurrentTransactedReceivers=4
+  createMultipleTransactedReceivers=true
+  connected=true
+  supportedProtocols=[tcp]
+  serviceOverrides=<none>
+}
+
+2019-12-04 03:09:43,930 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Starting connector: TCP
+2019-12-04 03:09:43,938 [main] INFO  org.mule.lifecycle.AbstractLifecycleManager - Starting model: _muleSystemModel
+2019-12-04 03:09:43,939 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Starting flow: inputsFlow
+2019-12-04 03:09:43,940 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Starting service: inputsFlow.stage1
+2019-12-04 03:09:43,943 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Starting flow: mainFlow
+2019-12-04 03:09:43,943 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Starting service: mainFlow.stage1
+2019-12-04 03:09:43,946 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.1961232715
+2019-12-04 03:09:43,951 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.765880900
+2019-12-04 03:09:43,951 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Starting flow: mastercardFlow
+2019-12-04 03:09:43,952 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Starting service: mastercardFlow.stage1
+2019-12-04 03:09:43,954 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.265629779
+2019-12-04 03:09:43,954 [main] INFO  org.mule.construct.FlowConstructLifecycleManager - Starting flow: visaFlow
+2019-12-04 03:09:43,954 [main] INFO  org.mule.processor.SedaStageLifecycleManager - Starting service: visaFlow.stage1
+2019-12-04 03:09:43,956 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.1979825302
+2019-12-04 03:09:43,956 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.1141059550
+2019-12-04 03:09:43,957 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.1996787860
+2019-12-04 03:09:43,957 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.249109901
+2019-12-04 03:09:43,957 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.215638041
+2019-12-04 03:09:43,957 [main] INFO  org.mule.component.ComponentLifecycleManager - Starting component: component.485542604
+2019-12-04 03:09:43,990 [main] INFO  org.mule.module.management.agent.WrapperManagerAgent - This JVM hasn't been launched by the wrapper, the agent will not run.
+2019-12-04 03:09:44,055 [main] INFO  org.mule.module.management.agent.AbstractJmxAgent - Registered Connector Service with name Mule.tcpclient:type=Connector,name="TCP"
+2019-12-04 03:09:44,059 [main] INFO  org.mule.DefaultMuleContext - 
+**********************************************************************
+* Application: tcpclient                                             *
+* OS encoding: \, Mule encoding: UTF-8                               *
+*                                                                    *
+* Agents Running:                                                    *
+*   Batch module default engine                                      *
+*   JMX Agent                                                        *
+*   Wrapper Manager                                                  *
+**********************************************************************
+2019-12-04 03:11:04,250 [[tcpclient].HTTP_Listener_Configuration.worker.03] INFO  org.mule.lifecycle.AbstractLifecycleManager - Initialising: 'TCP.dispatcher.1374065383'. Object is: TcpMessageDispatcher
+2019-12-04 03:11:04,253 [[tcpclient].HTTP_Listener_Configuration.worker.03] INFO  org.mule.lifecycle.AbstractLifecycleManager - Starting: 'TCP.dispatcher.1374065383'. Object is: TcpMessageDispatcher
+2019-12-04 03:11:04,344 [[tcpclient].HTTP_Listener_Configuration.worker.03] INFO  org.mule.api.processor.LoggerMessageProcessor - OK
+0fec3cb2-2267-45ee-99a6-335be094039d:asdfçlksjadop:123456:2020-01:123:116.85
