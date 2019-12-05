@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration" protocol="HTTPS" host="#[flowVars.cepaddress.host]" port="#[flowVars.cepaddress.port]" basePath="#[flowVars.cepaddress.path]" doc:name="HTTP Request Configuration"/>
+    <flow name="uddi_testFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/SOAserver" allowedMethods="GET" doc:name="HTTP"/>
+        <enricher doc:name="Message Enricher">
+            <processor-chain doc:name="Processor Chain">
+                <scripting:component doc:name="Groovy">
+                    <scripting:script engine="Groovy"><![CDATA[import br.ufsc.das.discovery.advance.ServiceDiscoveryHelper
+import org.mule.api.transport.PropertyScope
+
+message.setProperty("cepAddress", ServiceDiscoveryHelper.discoverServiceEndpoint("CEPServiceSoapService","SOAP"), PropertyScope.INVOCATION)
+
+return payload]]></scripting:script>
+                </scripting:component>
+                <http:request config-ref="HTTP_Request_Configuration" path="/cepInfo/#[payload.cep]" method="GET" doc:name="HTTP"/>
+                <json:json-to-object-transformer returnClass="java.util.HashMap" doc:name="JSON to Object"/>
+                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+            </processor-chain>
+            <enrich source="#[payload]" target="#[payload.cepservice]"/>
+        </enricher>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>
