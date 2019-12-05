@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ESB Projeto de Integracao</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+</head>
+<body>
+	<h1>NEwTec - Venda de Robos funcionais - Projeto de integração</h1>
+	<hr>
+	<p>
+		Bem vindo a NewTec uma empresa de tecnologia robotica.<br>
+		Escolha um dos nosso produtos abaixo.<br>
+
+	</p>
+	<form action="/tratarForm" method="post">
+		<!--           <form action="compra.html" method="post"> -->
+		1- <img src="images/domestico.jpeg" width="50" height="50"
+			alt="domestico" /> <img src="images/ReatorArc.png" width="50"
+			height="50" alt="domestico" /> Robo Domestico com gerador Ark -
+		Quantidade:<input type="text" name="QRDRA" value="0" size="2"><br>
+
+		2-<img src="images/domestico.jpeg" width="50" height="50"
+			alt="domestico" /> <img src="images/reatorSolar.jpeg" width="50"
+			height="50" alt="domestico" /> Robo Domestico com gerador solar-
+		Quantidade:<input type="text" name="QRDRS" value="0" size="2"><br>
+		<hr>
+		3- <img src="images/seguranca.jpeg" width="50" height="50"
+			alt="domestico" /> <img src="images/ReatorArc.png" width="50"
+			height="50" alt="domestico" /> Robo Seguranca com gerador Ark -
+		Quantidade:<input type="text" name="QRSRA" value="0" size="2"><br>
+
+		4-<img src="images/seguranca.jpeg" width="50" height="50"
+			alt="domestico" /> <img src="images/reatorSolar.jpeg" width="50"
+			height="50" alt="domestico" /> Robo Seguranca com gerador solar-
+		Quantidade:<input type="text" name="QRSRS" value="0" size="2"><br>
+		<hr>
+		5-<img src="images/medico.jpeg" width="50" height="50" alt="domestico" />
+		<img src="images/ReatorArc.png" width="50" height="50" alt="domestico" />
+		Robo Medico com gerador Ark - Quantidade:<input type="text"
+			name="QRMRA" value="0" size="2"><br> 6-<img
+			src="images/medico.jpeg" width="50" height="50" alt="domestico" /> <img
+			src="images/reatorSolar.jpeg" width="50" height="50" alt="domestico" />
+		Robo Medico com gerador solar- Quantidade:<input type="text"
+			name="QRMRS" value="0" size="2"><br>
+
+		<hr>
+		<br> Informe o CEP de entrega e o nome do comprador<br>
+		<table>
+			<tr>
+				<td>Nome:</td>
+				<td><input type="text" name="nome" size="50"></td>
+			</tr>
+			<tr>
+				<td>CEP:</td>
+				<td><input type="text" name="cep" size="8"></td>
+			</tr>
+			<tr>
+				<td>Endereco:</td>
+				<td><input type="text" name="endereco" size="50"></td>
+			</tr>
+			<tr>
+				<td>Estado:</td>
+				<td><input type="text" name="estado" value="SC" size="2"></td>
+			</tr>
+		</table>
+
+		<hr>
+		<input type="submit" value="Realizar Pedido"> <input
+			type="reset" value="Cancel">
+	</form>
+
+</body>
+</html>
