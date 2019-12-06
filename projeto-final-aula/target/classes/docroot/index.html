@@ -4,98 +4,240 @@
 <title>ESB Projeto de Integracao</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
+<script src="./libs/jquery-3.4.1.min.js"></script>
+<!-- <script src="./libs/popper.js-1.16.0/dist/popper.min.js"></script> -->
+<script src="./libs/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./libs/bootstrap-4.4.1-dist/css/bootstrap.min.css">
 </head>
 <body>
-	<h1>NEwTec - Venda de Robos funcionais - Projeto de integração</h1>
-	<hr>
-	<p>
-		Bem vindo a NewTec uma empresa de tecnologia robotica.<br>
-		Escolha um dos nosso produtos abaixo.<br>
+	<header class="navbar navbar-dark bg-dark shadow-sm" style="display: flex; justify-content: center;">
+		<h1 style="color: #d1d2d4;">NewTec - Venda de Robos funcionais - Projeto de integração</h1>
+	</header>
 
-	</p>
-	<form action="/tratarForm" method="post">
-		<!--           <form action="compra.html" method="post"> -->
-		1- <img src="images/domestico.jpeg" width="50" height="50"
-			alt="domestico" /> <img src="images/ReatorArc.png" width="50"
-			height="50" alt="domestico" /> Robo Domestico com gerador Ark -
-		Quantidade:<input type="text" name="QRDRA" value="0" size="2"><br>
+	<div style="display: flex; flex-flow: column; align-items: center;">
+		<h5 style="text-align: center; padding: 20px 0 10px 0;">
+			Bem vindo a NewTec uma empresa de tecnologia robotica.<br>
+			Escolha um dos nosso produtos abaixo.<br>
 
-		2-<img src="images/domestico.jpeg" width="50" height="50"
-			alt="domestico" /> <img src="images/reatorSolar.jpeg" width="50"
-			height="50" alt="domestico" /> Robo Domestico com gerador solar-
-		Quantidade:<input type="text" name="QRDRS" value="0" size="2"><br>
-		<hr>
-		3- <img src="images/seguranca.jpeg" width="50" height="50"
-			alt="domestico" /> <img src="images/ReatorArc.png" width="50"
-			height="50" alt="domestico" /> Robo Seguranca com gerador Ark -
-		Quantidade:<input type="text" name="QRSRA" value="0" size="2"><br>
-
-		4-<img src="images/seguranca.jpeg" width="50" height="50"
-			alt="domestico" /> <img src="images/reatorSolar.jpeg" width="50"
-			height="50" alt="domestico" /> Robo Seguranca com gerador solar-
-		Quantidade:<input type="text" name="QRSRS" value="0" size="2"><br>
-		<hr>
-		5-<img src="images/medico.jpeg" width="50" height="50" alt="domestico" />
-		<img src="images/ReatorArc.png" width="50" height="50" alt="domestico" />
-		Robo Medico com gerador Ark - Quantidade:<input type="text"
-			name="QRMRA" value="0" size="2"><br> 6-<img
-			src="images/medico.jpeg" width="50" height="50" alt="domestico" /> <img
-			src="images/reatorSolar.jpeg" width="50" height="50" alt="domestico" />
-		Robo Medico com gerador solar- Quantidade:<input type="text"
-			name="QRMRS" value="0" size="2"><br>
-
-		<hr>
-		Informe o CEP de entrega e o nome do comprador<br>
-		<table>
-			<tr>
-				<td>Nome:</td>
-				<td><input type="text" name="nome" size="50"></td>
-			</tr>
-			<tr>
-				<td>CPF:</td>
-				<td><input type="text" name="cpf" size="11"></td>
-			</tr>
-			<tr>
-				<td>CEP:</td>
-				<td><input type="text" name="cep" size="8"></td>
-			</tr>
-			<tr>
-				<td>Endereco:</td>
-				<td><input type="text" name="endereco" size="50"></td>
-			</tr>
-			<tr>
-				<td>Estado:</td>
-				<td><input type="text" name="estado" value="SC" size="2"></td>
-			</tr>
-			<tr>
-				<td>Telefone:</td>
-				<td><input type="text" name="telefone" value="48999999999" size="11"></td>
-			</tr>
-		</table>
-
-		<hr>
+		</h5>
 		
-		Informe os dados do cartão de crédito<br>
-		<table>
-			<tr>
-				<td>Número no Cartão:</td>
-				<td><input type="text" name="CardNumber" size="16" maxlength="16"></td>
-			</tr>
-			<tr>
-				<td>Nome no Cartão:</td>
-				<td><input type="text" name="CardName"></td>
-			</tr>
-			<tr>
-				<td>Data de Expiração:</td>
-				<td><input type="month" name=ExpirationDate></td>
-			</tr>
-		</table>
+		<form action="/tratarForm" method="post">
 		
-		<hr>
+			<div style="display: grid; grid-template-columns: 1fr 1fr; grid-column-gap: 25px;" >
+				<div class="card mb-4 shadow-sm" style="width: 300px;">
+					<div style="display: grid; grid-template-columns: 1fr 1fr; padding: 15px 20px 25px 20px; background-color: #343a40!important">
+						<img src="images/domestico.jpeg" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+						<img src="images/ReatorArc.png" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+					</div>
+
+					<div class="card-body">
+						<p class="card-text" style="text-align: center;">Robo Domestico com gerador Ark</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-outline-secondary minus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">-</span>
+								</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary plus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">+</span>
+								</button>
+							</div>
+
+							<input class="form-control" style="max-width: 80px;" type="text" name="QRDRA" value="0" size="2">
+						</div>
+					</div>
+				</div>
+				
+				<div class="card mb-4 shadow-sm" style="width: 300px;">
+					<div style="display: grid; grid-template-columns: 1fr 1fr; padding: 15px 20px 25px 20px; background-color: #343a40!important">
+						<img src="images/domestico.jpeg" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+						<img src="images/reatorSolar.jpeg" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+					</div>
+
+					<div class="card-body" style="text-align: center;">
+						<p class="card-text">Robo Domestico com gerador solar</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-outline-secondary minus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">-</span>
+								</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary plus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">+</span>
+								</button>
+							</div>
+
+							<input class="form-control" style="max-width: 80px;" type="text" name="QRDRS" value="0" size="2">
+						</div>
+					</div>
+				</div>
+				
+				<div class="card mb-4 shadow-sm" style="width: 300px;">
+					<div style="display: grid; grid-template-columns: 1fr 1fr; padding: 15px 20px 25px 20px; background-color: #343a40!important">
+						<img src="images/seguranca.jpeg" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+						<img src="images/ReatorArc.png" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+					</div>
+
+					<div class="card-body" style="text-align: center;">
+						<p class="card-text">Robo Seguranca com gerador Ark</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-outline-secondary minus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">-</span>
+								</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary plus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">+</span>
+								</button>
+							</div>
+
+							<input class="form-control" style="max-width: 80px;" type="text" name="QRSRA" value="0" size="2">
+						</div>
+					</div>
+				</div>
 		
-		<input type="submit" value="Realizar Pedido"> <input
-			type="reset" value="Cancel">
-	</form>
+				<div class="card mb-4 shadow-sm" style="width: 300px;">
+					<div style="display: grid; grid-template-columns: 1fr 1fr; padding: 15px 20px 25px 20px; background-color: #343a40!important">
+						<img src="images/seguranca.jpeg" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+						<img src="images/reatorSolar.jpeg" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+					</div>
+
+					<div class="card-body" style="text-align: center;">
+						<p class="card-text">Robo Seguranca com gerador solar</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-outline-secondary minus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">-</span>
+								</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary plus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">+</span>
+								</button>
+							</div>
+
+							<input class="form-control" style="max-width: 80px;" type="text" name="QRSRS" value="0" size="2">
+						</div>
+					</div>
+				</div>
+				
+				<div class="card mb-4 shadow-sm" style="width: 300px;">
+					<div style="display: grid; grid-template-columns: 1fr 1fr; padding: 15px 20px 25px 20px; background-color: #343a40!important">
+						<img src="images/medico.jpeg" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+						<img src="images/ReatorArc.png" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+					</div>
+
+					<div class="card-body" style="text-align: center;">
+						<p class="card-text">Robo Medico com gerador Ark</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-outline-secondary minus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">-</span>
+								</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary plus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">+</span>
+								</button>
+							</div>
+
+							<input class="form-control" style="max-width: 80px;" type="text" name="QRMRA" value="0" size="2">
+						</div>
+					</div>
+				</div>
+				
+								
+				<div class="card mb-4 shadow-sm" style="width: 300px;">
+					<div style="display: grid; grid-template-columns: 1fr 1fr; padding: 15px 20px 25px 20px; background-color: #343a40!important">
+						<img src="images/medico.jpeg" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+						<img src="images/reatorSolar.jpeg" width="50" height="50" alt="domestico" style="display: block; margin: 15px auto 0 auto;"/>
+					</div>
+
+					<div class="card-body" style="text-align: center;">
+						<p class="card-text">Robo Medico com gerador solar</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-outline-secondary minus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">-</span>
+								</button>
+								<button type="button" class="btn btn-sm btn-outline-secondary plus" style="width: 50px;">
+									<span style="font-size: 35px; line-height: 0.6;">+</span>
+								</button>
+							</div>
+
+							<input class="form-control" style="max-width: 80px;" type="text" name="QRMRS" value="0" size="2">
+						</div>
+					</div>
+				</div>
+		
+		
+			</div>
+		
+
+			<hr>
+			<h6>Informe o CEP de entrega e o nome do comprador</h6>
+			
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Nome</span>
+				</div>
+				<input type="text" class="form-control" name="nome" size="50">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">CEP</span>
+				</div>
+				<input type="text" class="form-control" name="cep" size="8">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Endereco</span>
+				</div>
+				<input type="text" class="form-control" name="endereco" size="50">
+			</div>
+
+		
+
+			<hr>
+			
+			<h6>Informe os dados do cartão de crédito</h6>
+			
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Número no Cartão</span>
+				</div>
+				<input type="text" class="form-control" name="CardNumber" size="16" maxlength="16">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Nome no Cartão</span>
+				</div>
+				<input type="text" class="form-control" name="CardName">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Data de Expiração</span>
+				</div>
+				<input type="month" class="form-control" name="ExpirationDate">
+			</div>
+
+			
+			<hr>
+			<div style="float: right;">
+				<input type="reset" value="Cancel" class="btn btn-outline-secondary">
+				<input type="submit" value="Realizar Pedido" class="btn btn-secondary"> 
+			</div>
+		</form>
+
+		<footer class="text-muted" style="background-color: #353b42!important; width: 100%; padding: 15px; margin-top: 20px;text-align: center; color: #bdbdbd!important">
+			<span>Desenvolvido por: Fernando Eckstein, Gabriel Cascavel e Angela Crepaldi</span>
+		</footer>
+
+<script>
+$(".plus").click(function() {
+	$(this).parent().parent().find("input").val(parseInt($(this).parent().parent().find("input").val()) + 1);
+});
+
+$(".minus").click(function() {
+	if ($(this).parent().parent().find("input").val() > 0) {
+		$(this).parent().parent().find("input").val(parseInt($(this).parent().parent().find("input").val()) - 1);
+	}
+});
+</script> 
+
 
 </body>
 </html>
