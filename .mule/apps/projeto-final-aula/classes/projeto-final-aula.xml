@@ -24,6 +24,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <http:request-config name="HTTP_BrRobotics" host="127.0.0.1" port="8080" doc:name="HTTP Request Configuration"/>
     <rmi:connector name="RMI" securityPolicy="${app.home}/java_policy" validateConnections="true" jndiInitialFactory="com.sun.jndi.rmi.registry.RegistryContextFactory" jndiProviderUrl="rmi://127.0.0.1:11099" doc:name="RMI"/>
     <http:request-config name="HTTP_freteService" host="localhost" port="55555" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="CEP_HTTP_jUDDi" host="localhost" port="5000" doc:name="HTTP Request Configuration"/>
     <flow name="frontend">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/*" doc:name="HTTP"/>
         <http:static-resource-handler resourceBase="${app.home}/docroot" doc:name="HTTP Static Resource Handler"/>
@@ -31,6 +32,11 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <flow name="fluxoPrincipal">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/tratarForm" doc:name="HTTP"/>
         <component class="br.ufsc.das.Tratamento" doc:name="Tratamento"/>
+        <set-variable variableName="payloadVar" value="#[payload]" doc:name="Salvar Payload"/>
+        <enricher doc:name="Message Enricher">
+            <http:request config-ref="CEP_HTTP_jUDDi" path="/getCep/#[payload.cep]" method="GET" doc:name="Pega CEP jUDDI"/>
+            <enrich source="#[json:uf]" target="#[payload.estado]"/>
+        </enricher>
         <enricher doc:name="Message Enricher">
             <scatter-gather doc:name="Scatter-Gather">
                 <processor-chain>
@@ -126,6 +132,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             <enrich source="#[payload]" target="#[flowVars.payloadVar.cartao.TransactionValue]"/>
         </enricher>
         <flow-ref name="tratamentoCartaoCredito" doc:name="Processamento Cartao de Credito"/>
+        <set-variable variableName="transactionData" value="#[payload]" doc:name="Salvar Dados Transacao"/>
 
         <set-payload value="#[flowVars.payloadVar]" doc:name="Setar Payload Anterior" encoding="UTF-8"/>
         <enricher doc:name="Message Enricher">
