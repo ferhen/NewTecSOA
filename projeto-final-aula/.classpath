@@ -10,6 +10,10 @@
 	<classpathentry kind="src" path="src/main/api"/>
 	<classpathentry kind="src" path="src/main/wsdl"/>
 	<classpathentry kind="src" path="src/test/munit"/>
-	<classpathentry kind="lib" path="C:/Users/gabrielm/Documents/Trabalho SOA/Libs/calculocomissao-service-1.0.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Angela/AnypointStudio/Libs/calculocomissao-service-1.0.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Angela/AnypointStudio/Libs/juddi-uddi-client-1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Angela/AnypointStudio/Libs/mysql-connector-java-5.1.48.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Angela/AnypointStudio/Libs/notafiscal-service-1.0.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Angela/AnypointStudio/Libs/poi-3.14-20160307.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
