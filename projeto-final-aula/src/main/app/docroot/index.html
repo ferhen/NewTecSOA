@@ -197,7 +197,19 @@ input::-webkit-inner-spin-button {
 				</div>
 				<input type="text" class="form-control" name="endereco" size="70">
 			</div>
-
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">CPF</span>
+				</div>
+				<input type="text" class="form-control" name="cpf">
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroup-sizing-default">Telefone</span>
+				</div>
+				<input type="tel" class="form-control" name="telefone">
+			</div>
+		
 		
 
 			<hr>
@@ -235,6 +247,12 @@ input::-webkit-inner-spin-button {
 			<span>Desenvolvido por: Fernando Eckstein, Gabriel Cascavel e Angela Crepaldi</span>
 		</footer>
 
+<!-- 
+<div class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+ -->
+
 <script>
 $(".plus").click(function() {
 	$(this).parent().parent().find("input").val(parseInt($(this).parent().parent().find("input").val()) + 1);
@@ -261,6 +279,7 @@ $(":submit").click(function(evt) {
 		 evt.preventDefault();
 		 alert("Pelo menos um produto deve ser selecionado!");
 	}
+	//$(this).prop('disabled',true);
 });
 </script> 
 
