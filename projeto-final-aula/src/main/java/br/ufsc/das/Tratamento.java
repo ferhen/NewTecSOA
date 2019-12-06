@@ -16,10 +16,11 @@ public class Tratamento {
 		// String codigoCompra = params.get("codigo");
 		String nome = params.get("nome");
 		String cpf = params.get("cpf");
-		String cep = params.get("cep");
+		String cep = params.get("cep").replace("-", "");
 		String endereco = params.get("endereco");
 		String estado = params.get("estado");
 		String telefone = params.get("telefone");
+		String email = params.get("email");
 
 		// cria o bean para ser enviado para o proximo estagio
 		Pedido bean = new Pedido();
@@ -30,6 +31,7 @@ public class Tratamento {
 		bean.setEndereco(endereco);
 		bean.setEstado(estado);
 		bean.setTelefone(telefone);
+		bean.setEmail(email);
 
 		// tratar itens do pedido ... para passar ao bean
 		int qtdRoboDomestico = Integer.parseInt(qtdDomesticoArk)

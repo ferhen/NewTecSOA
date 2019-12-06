@@ -112,6 +112,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
                 <include-entry-point method="parse"/> 
             </method-entry-point-resolver>
         </component>
+        <component class="br.ufsc.das.CheckIfValidShipping" doc:name="Check If Valid Shipping"/>
         <enricher doc:name="Message Enricher">
             <set-variable variableName="valorFrete" value="#[payload]" doc:name="Variable"/>
             <enrich source="#[payload]" target="#[flowVars.payloadVar.valorFrete]"/>
