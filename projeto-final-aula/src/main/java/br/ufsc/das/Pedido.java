@@ -8,7 +8,7 @@ public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String codigo;
+	private int codigo;
 	private String cliente;
 	private String CPF;
 	private String endereco;
@@ -36,11 +36,11 @@ public class Pedido implements Serializable {
 	
 	public CartaoCredito cartao;
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
@@ -195,7 +195,15 @@ public class Pedido implements Serializable {
 	public void setLinkNotaFiscal(String linkNotaFiscal) {
 		this.linkNotaFiscal = linkNotaFiscal;
 	}
-
+	
+	public String getItensRobos() {
+		return "Robo Domestico = " + qtdRoboDomestico + "; Robo Segurança = " + qtdRoboSeguranca + "; Robo Medico = " + qtdRoboMedico + ";";
+	}
+	
+	public String getItensReator(){
+		return "Reator Ark = " + qtdReatorArk + "; Reator Solar = " + qtdReatorSolar + ";";
+	}
+	
 	@Override
 	public String toString() {
 		return "Pedido [codigo=" + codigo + ", cliente=" + cliente

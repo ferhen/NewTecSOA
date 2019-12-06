@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:tcp="http://www.mulesoft.org/schema/mule/tcp" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:rmi="http://www.mulesoft.org/schema/mule/rmi" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:tcp="http://www.mulesoft.org/schema/mule/tcp" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:rmi="http://www.mulesoft.org/schema/mule/rmi" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
@@ -14,7 +14,9 @@ http://www.mulesoft.org/schema/mule/rmi http://www.mulesoft.org/schema/mule/rmi/
 http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
 http://www.mulesoft.org/schema/mule/tcp http://www.mulesoft.org/schema/mule/tcp/current/mule-tcp.xsd
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
 	<global-property name="visa.tcp.port" value="5010" doc:name="Global Property"/>
     <tcp:connector name="TCP" validateConnections="true" sendBufferSize="1024" receiveBufferSize="1024" receiveBacklog="0" clientSoTimeout="10000" serverSoTimeout="10000" socketSoLinger="0" doc:name="TCP">
        <tcp:xml-eof-protocol/>
@@ -26,6 +28,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <http:request-config name="HTTP_freteService" host="localhost" port="55555" doc:name="HTTP Request Configuration"/>
     <http:request-config name="CEP_HTTP_jUDDi" host="localhost" port="5000" doc:name="HTTP Request Configuration"/>
     <http:request-config name="HTTP_Request_Configuration" host="localhost" port="8903" doc:name="HTTP Request Configuration"/>
+    <db:mysql-config name="MySQL_Configuration" host="localhost" port="3306" user="root" database="NewTec" doc:name="MySQL Configuration"/>
     <flow name="frontend">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/*" doc:name="HTTP"/>
         <http:static-resource-handler resourceBase="${app.home}/docroot" doc:name="HTTP Static Resource Handler"/>
@@ -168,6 +171,23 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <catch-exception-strategy doc:name="Catch Exception Strategy">
             <set-payload value="Ocorreu um erro processando requis&#227;o -&gt; #[exception.cause]" encoding="UTF-8" mimeType="text/plain" doc:name="Setar Mensagem de Erro"/>
         </catch-exception-strategy>
+    </flow>
+    <flow name="projeto-final-aulaFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/gerarRelatorio" allowedMethods="GET" doc:name="HTTP"/>
+        <response>
+            <set-payload value="Enviando e-mail para #[message.outboundProperties.'destinatarioEmail']" doc:name="Set Payload"/>
+        </response>
+        <db:select config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[SELECT *
+FROM pedidos;]]></db:parameterized-query>
+        </db:select>
+        <set-property propertyName="destinatarioEmail" value="gabrielcascaes_g_@hotmail.com" doc:name="Property"/>
+        <async doc:name="Async">
+            <component class="br.ufsc.das.GerarRelatorio" doc:name="Java"/>
+            <set-attachment attachmentName="Relatorio_de_Vendas.xls" value="#[message.payload]" contentType="application/vnd.ms-excel" doc:name="Attachment"/>
+            <set-payload value="Ola! Segue em anexo os pedidos." doc:name="Set corpo do e-mail"/>
+            <smtp:outbound-endpoint host="smtp.sistemas.ufsc.br" port="587" user="testedas" password="testedas" to="#[message.outboundProperties.'destinatarioEmail']" from="testedas@sistemas.ufsc.br" subject="Relat&#243;rio de vendas - NewTec" responseTimeout="10000" doc:name="SMTP"/>
+        </async>
     </flow>
     <flow name="tratamentoCartaoCredito">
         <set-payload value="#[flowVars.payloadVar.cartao]" doc:name="Setar cartao no Payload"/>
