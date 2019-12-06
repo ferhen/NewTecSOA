@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:rmi="http://www.mulesoft.org/schema/mule/rmi" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/rmi http://www.mulesoft.org/schema/mule/rmi/current/mule-rmi.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+    <ws:consumer-config name="Web_Service_Consumer" wsdlLocation="http://localhost:8080/StarkSystem/StarkSystemService?wsdl" service="StarkSystemService" port="StarkSystemServicePort" serviceAddress="http://localhost:8080/StarkSystem/StarkSystemService" doc:name="Web Service Consumer"/>
+    <http:request-config name="HTTP_BrRobotics" host="127.0.0.1" port="8080" doc:name="HTTP Request Configuration"/>
+    <rmi:connector name="RMI" securityPolicy="${app.home}/java_policy" validateConnections="true" jndiInitialFactory="com.sun.jndi.rmi.registry.RegistryContextFactory" jndiProviderUrl="rmi://127.0.0.1:11099" doc:name="RMI"/>
+    <http:request-config name="HTTP_freteService" host="localhost" port="55555" doc:name="HTTP Request Configuration"/>
+    <flow name="projeto-final-aulaFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
+        <http:static-resource-handler resourceBase="${app.home}/docroot" doc:name="HTTP Static Resource Handler"/>
+    </flow>
+    <flow name="projeto-final-aulaFlow1">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/tratarForm" doc:name="HTTP"/>
+        <component class="br.ufsc.das.Tratamento" doc:name="Java"/>
+        <enricher doc:name="Message Enricher">
+            <scatter-gather doc:name="Scatter-Gather">
+                <processor-chain>
+                    <component class="br.ufsc.das.TratarPedidoReator" doc:name="Java"/>
+                    <enricher doc:name="Message Enricher">
+                        <processor-chain doc:name="Processor Chain">
+                            <dw:transform-message doc:name="Transform Message">
+                                <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+%namespace ns0 http://ws.starksystem.com/
+---
+{
+	ns0#inserirPedido: {
+		pedido: {
+			cliente: payload.cliente,
+			endereco: payload.endereco,
+			estado: payload.estado,
+			qtdReatorArk: payload.qtdReatorArk,
+			qtdReatorSolar: payload.qtdReatorSolar
+		}
+	}
+}]]></dw:set-payload>
+                            </dw:transform-message>
+                            <ws:consumer config-ref="Web_Service_Consumer" operation="inserirPedido" doc:name="Web Service Consumer"/>
+                        </processor-chain>
+                        <enrich source="#[xpath('//total')]" target="#[payload.total]"/>
+                        <enrich source="#[xpath('//codigo')]" target="#[payload.codigo]"/>
+                    </enricher>
+                </processor-chain>
+                <processor-chain>
+                    <component class="br.ufsc.das.TratarPedidoRobo" doc:name="Java"/>
+                    <enricher doc:name="Message Enricher">
+                        <processor-chain doc:name="Processor Chain">
+                            <dw:transform-message doc:name="Transform Message">
+                                <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	"cliente": payload.cliente,
+	"endereco": payload.endereco,
+	"estado": payload.estado,
+	"qtdRoboDomestico": payload.qtdRoboDomestico,
+	"qtdRoboMedico": payload.qtdRoboMedico,
+	"qtdRoboSeguranca": payload.qtdRoboSeguranca
+}]]></dw:set-payload>
+                            </dw:transform-message>
+                            <http:request config-ref="HTTP_BrRobotics" path="/BrRobotics/rest/BrRoboticsService/inserirPedido" method="POST" doc:name="HTTP"/>
+                        </processor-chain>
+                        <enrich source="#[json:total]" target="#[payload.total]"/>
+                        <enrich source="#[json:codigo]" target="#[payload.codigo]"/>
+                    </enricher>
+                </processor-chain>
+            </scatter-gather>
+            <enrich source="#[payload]" target="#[payload.pecas]"/>
+        </enricher>
+        <component class="br.ufsc.das.CalcularTotalGeralDoPedido" doc:name="Java"/>
+        <set-variable variableName="payloadVar" value="#[payload]" doc:name="Variable"/>
+        <set-payload value="#[payload.valorTotal]" doc:name="Set Payload"/>
+        <rmi:outbound-endpoint exchange-pattern="request-response" method="calcularValorComComissao" methodArgumentTypes="float" connector-ref="RMI" address="rmi://127.0.0.1/CalculoComissaoService" responseTimeout="10000" doc:name="RMI"/>
+        <set-variable variableName="valorTotal" value="#[payload]" doc:name="Variable"/>
+        <set-payload value="#[flowVars.payloadVar.estado]" doc:name="Set Payload"/>
+        <enricher doc:name="Message Enricher">
+            <http:request config-ref="HTTP_freteService" path="/api/Frete/{UF}" method="GET" doc:name="HTTP">
+                <http:request-builder>
+                    <http:uri-param paramName="UF" value="#[payload]"/>
+                </http:request-builder>
+            </http:request>
+            <enrich source="#[json:valorFrete]" target="#[payload]"/>
+        </enricher>
+        <component class="br.ufsc.das.ParseFloat" doc:name="Java"/>
+        <enricher doc:name="Message Enricher">
+            <dw:transform-message doc:name="Transform Message">
+                <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+{
+	valorTotal: payload + flowVars.valorTotal
+}]]></dw:set-payload>
+                <dw:set-variable variableName="valorTotal"><![CDATA[%dw 1.0
+%output application/java
+---
+{
+}]]></dw:set-variable>
+            </dw:transform-message>
+            <enrich source="#[payload.valorTotal]" target="#[payload]"/>
+        </enricher>
+        <component class="br.ufsc.das.ParseFloat" doc:name="Java"/>
+        <set-variable variableName="valorTotal" value="#[payload]" doc:name="Variable"/>
+        <set-payload value="#[flowVars.payloadVar]" doc:name="Set Payload"/>
+        <enricher doc:name="Message Enricher">
+            <set-variable variableName="payloadVar" value="#[payload]" doc:name="Variable"/>
+            <enrich source="#[flowVars.valorTotal]" target="#[payload.valorTotal]"/>
+        </enricher>
+        <component class="br.ufsc.das.TratarResultadoPedido" doc:name="Java"/>
+
+        <object-to-string-transformer mimeType="text/plain" doc:name="Object to String"/>
+    </flow>
+</mule>

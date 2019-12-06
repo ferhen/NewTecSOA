@@ -1,4 +1,5 @@
-﻿using calculoFreteAPI.Services;
+﻿using calculoFreteAPI.Entities;
+using calculoFreteAPI.Services;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,9 @@ namespace calculoFreteAPI.Controllers
         }
 
         [HttpGet("{uf}")]
-        public ActionResult<string> CalcularFrete([FromRoute] string uf)
+        public Result CalcularFrete([FromRoute] string uf)
         {
-            return Ok(service.CalcularFrete(uf));
+            return service.CalcularFrete(uf);
         }
     }
 }
