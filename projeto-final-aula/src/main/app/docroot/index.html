@@ -8,6 +8,16 @@
 <!-- <script src="./libs/popper.js-1.16.0/dist/popper.min.js"></script> -->
 <script src="./libs/bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="./libs/bootstrap-4.4.1-dist/css/bootstrap.min.css">
+<style>
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+</style>
 </head>
 <body>
 	<header class="navbar navbar-dark bg-dark shadow-sm" style="display: flex; justify-content: center;">
@@ -42,7 +52,7 @@
 								</button>
 							</div>
 
-							<input class="form-control" style="max-width: 80px;" type="text" name="QRDRA" value="0" size="2">
+							<input class="form-control qty" style="max-width: 80px;" type="number" name="QRDRA" value="0" size="2">
 						</div>
 					</div>
 				</div>
@@ -65,7 +75,7 @@
 								</button>
 							</div>
 
-							<input class="form-control" style="max-width: 80px;" type="text" name="QRDRS" value="0" size="2">
+							<input class="form-control qty" style="max-width: 80px;" type="number" name="QRDRS" value="0" size="2">
 						</div>
 					</div>
 				</div>
@@ -88,7 +98,7 @@
 								</button>
 							</div>
 
-							<input class="form-control" style="max-width: 80px;" type="text" name="QRSRA" value="0" size="2">
+							<input class="form-control qty" style="max-width: 80px;" type="number" name="QRSRA" value="0" size="2">
 						</div>
 					</div>
 				</div>
@@ -111,7 +121,7 @@
 								</button>
 							</div>
 
-							<input class="form-control" style="max-width: 80px;" type="text" name="QRSRS" value="0" size="2">
+							<input class="form-control qty" style="max-width: 80px;" type="number" name="QRSRS" value="0" size="2">
 						</div>
 					</div>
 				</div>
@@ -134,7 +144,7 @@
 								</button>
 							</div>
 
-							<input class="form-control" style="max-width: 80px;" type="text" name="QRMRA" value="0" size="2">
+							<input class="form-control qty" style="max-width: 80px;" type="number" name="QRMRA" value="0" size="2">
 						</div>
 					</div>
 				</div>
@@ -158,7 +168,7 @@
 								</button>
 							</div>
 
-							<input class="form-control" style="max-width: 80px;" type="text" name="QRMRS" value="0" size="2">
+							<input class="form-control qty" style="max-width: 80px;" type="number" name="QRMRS" value="0" size="2">
 						</div>
 					</div>
 				</div>
@@ -234,6 +244,23 @@ $(".plus").click(function() {
 $(".minus").click(function() {
 	if ($(this).parent().parent().find("input").val() > 0) {
 		$(this).parent().parent().find("input").val(parseInt($(this).parent().parent().find("input").val()) - 1);
+	}
+});
+
+$(":submit").click(function(evt) {
+	var sum = 0;
+	$(".qty").each(function() {
+		
+		sum = sum + $(this).val();
+		if ($(this).val() < 0) {
+			evt.preventDefault();
+			alert("Não é possível comprar produtos negativos!");
+			return false;
+		}
+	});
+	if (sum == 0) {
+		 evt.preventDefault();
+		 alert("Pelo menos um produto deve ser selecionado!");
 	}
 });
 </script> 
