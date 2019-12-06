@@ -10,8 +10,12 @@ public class Pedido implements Serializable {
 
 	private String codigo;
 	private String cliente;
+	private String CPF;
 	private String endereco;
+	private String bairro;
+	private String cidade;
 	private String estado;
+	private String telefone;
 
 	private String cep;
 
@@ -21,7 +25,11 @@ public class Pedido implements Serializable {
 	private int qtdReatorArk;
 	private int qtdReatorSolar;
 	
-	private float valorTotal; 
+	private Float valorFrete;
+	private Float valorTotal; 
+	
+	private String cdNotaFiscal;
+	private String linkNotaFiscal;
 
 	private Collection<PedidoPeca> pecas = new ArrayList<>();
 	
@@ -43,6 +51,14 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 	}
 
+	public String getCPF() {
+		return CPF;
+	}
+
+	public void setCPF(String cPF) {
+		CPF = cPF;
+	}
+
 	public String getEndereco() {
 		return endereco;
 	}
@@ -51,12 +67,36 @@ public class Pedido implements Serializable {
 		this.endereco = endereco;
 	}
 
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
 	public String getEstado() {
 		return estado;
 	}
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public int getqtdRoboDomestico() {
@@ -115,12 +155,36 @@ public class Pedido implements Serializable {
 		this.cep = cep;
 	}
 	
+	public Float getValorFrete() {
+		return valorFrete;
+	}
+
+	public void setValorFrete(Float valorFrete) {
+		this.valorFrete = valorFrete;
+	}
+
 	public float getValorTotal() {
 		return valorTotal;
 	}
 
 	public void setValorTotal(float valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	public String getCdNotaFiscal() {
+		return cdNotaFiscal;
+	}
+
+	public void setCdNotaFiscal(String cdNotaFiscal) {
+		this.cdNotaFiscal = cdNotaFiscal;
+	}
+
+	public String getLinkNotaFiscal() {
+		return linkNotaFiscal;
+	}
+
+	public void setLinkNotaFiscal(String linkNotaFiscal) {
+		this.linkNotaFiscal = linkNotaFiscal;
 	}
 
 	@Override

@@ -24,6 +24,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <http:request-config name="HTTP_BrRobotics" host="127.0.0.1" port="8080" doc:name="HTTP Request Configuration"/>
     <rmi:connector name="RMI" securityPolicy="${app.home}/java_policy" validateConnections="true" jndiInitialFactory="com.sun.jndi.rmi.registry.RegistryContextFactory" jndiProviderUrl="rmi://127.0.0.1:11099" doc:name="RMI"/>
     <http:request-config name="HTTP_freteService" host="localhost" port="55555" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration" host="localhost" port="8903" doc:name="HTTP Request Configuration"/>
     <flow name="frontend">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/*" doc:name="HTTP"/>
         <http:static-resource-handler resourceBase="${app.home}/docroot" doc:name="HTTP Static Resource Handler"/>
@@ -106,6 +107,10 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             </method-entry-point-resolver>
         </component>
         <enricher doc:name="Message Enricher">
+            <set-variable variableName="valorFrete" value="#[payload]" doc:name="Variable"/>
+            <enrich source="#[payload]" target="#[flowVars.payloadVar.valorFrete]"/>
+        </enricher>
+        <enricher doc:name="Message Enricher">
             <dw:transform-message doc:name="Transform Message">
                 <dw:set-payload><![CDATA[%dw 1.0
 %output application/java
@@ -133,6 +138,23 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             <set-variable variableName="payloadVar" value="#[payload]" doc:name="Salvar Payload" encoding="UTF-8"/>
             <enrich source="#[flowVars.valorTotal]" target="#[payload.valorTotal]"/>
         </enricher>
+        <component class="br.ufsc.das.MontaXmlNotaFiscal" doc:name="Java"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/gerarNotaFiscal" method="POST" sendBodyMode="ALWAYS" doc:name="HTTP">
+            <http:request-builder>
+                <http:header headerName="Content-Type" value="text/xml"/>
+            </http:request-builder>
+        </http:request>
+        <json:xml-to-json-transformer doc:name="XML to JSON"/>
+        <enricher doc:name="Message Enricher">
+            <set-variable variableName="do" value="nothing" doc:name="Variable"/>
+            <enrich source="#[json:emissaoNotaFiscal]" target="#[payload]"/>
+        </enricher>
+        <enricher doc:name="Message Enricher">
+            <set-variable variableName="do" value="nothing" doc:name="Variable"/>
+            <enrich source="#[json:numeroNotaFiscal]" target="#[flowVars.payloadVar.cdNotaFiscal]"/>
+            <enrich source="#[json:urlNotaFiscal]" target="#[flowVars.payloadVar.linkNotaFiscal]"/>
+        </enricher>
+        <set-payload value="#[flowVars.payloadVar]" encoding="UTF-8" doc:name="Setar Payload Anterior"/>
         <component class="br.ufsc.das.TratarResultadoPedido" doc:name="Tratar Resultado Pedido"/>
 
         <object-to-string-transformer mimeType="text/plain" doc:name="Object to String" encoding="UTF-8"/>

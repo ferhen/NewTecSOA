@@ -46,8 +46,15 @@ public class TratarResultadoPedido {
 		sb.append("Total Itens: " + totalGeral);
 		
 		sb.append("\n----------------------------\n");
+		sb.append("Frete: " + pedido.getValorFrete());
+		
+		sb.append("\n----------------------------\n");
 		sb.append("Total Geral: " + pedido.getValorTotal());
 
+		sb.append("\n----------------------------\n");
+		sb.append("NFe: " + pedido.getCdNotaFiscal() + "\n");
+		sb.append(pedido.getLinkNotaFiscal() + "\n");
+		
 		return sb.toString();
 	}
 

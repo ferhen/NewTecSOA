@@ -10,6 +10,6 @@
 	<classpathentry kind="src" path="src/main/api"/>
 	<classpathentry kind="src" path="src/main/wsdl"/>
 	<classpathentry kind="src" path="src/test/munit"/>
-	<classpathentry kind="lib" path="C:/Projects/NewTecSOA/Libs/calculocomissao-service-1.0.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/gabrielm/Documents/Trabalho SOA/Libs/calculocomissao-service-1.0.0-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
