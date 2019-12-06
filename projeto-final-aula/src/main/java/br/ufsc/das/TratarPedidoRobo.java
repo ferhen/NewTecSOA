@@ -15,6 +15,7 @@ public class TratarPedidoRobo {
 		bean.setQtdRoboMedico(pedido.getqtdRoboMedico());
 		bean.setQtdRoboSeguranca(pedido.getqtdRoboSeguranca());
 
+		bean.setItens("Robo Domestico=" + pedido.getqtdRoboDomestico() + ";" + "Robo Seguranca=" + pedido.getqtdRoboSeguranca() + ";" + "Robo Medico=" + pedido.getqtdRoboMedico());
 
 		return bean;
 	}

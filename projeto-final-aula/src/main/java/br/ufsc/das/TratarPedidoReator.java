@@ -13,6 +13,8 @@ public class TratarPedidoReator {
 		bean.setQtdReatorArk(pedido.getqtdReatorArk());
 		bean.setQtdReatorSolar(pedido.getqtdReatorSolar());
 		
+		bean.setItens("Reator Ark=" + pedido.getqtdReatorArk() + ";Reator Solar=" + pedido.getqtdReatorSolar());
+		
 		return bean;
 
 	}
