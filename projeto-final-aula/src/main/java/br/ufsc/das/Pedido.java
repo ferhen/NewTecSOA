@@ -16,6 +16,7 @@ public class Pedido implements Serializable {
 	private String cidade;
 	private String estado;
 	private String telefone;
+	private String email;
 
 	private String cep;
 
@@ -97,6 +98,14 @@ public class Pedido implements Serializable {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getqtdRoboDomestico() {
