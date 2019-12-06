@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using calculoFreteAPI.Entities;
+using System.Diagnostics;
 
 namespace calculoFreteAPI.Services
 {
@@ -7,7 +8,7 @@ namespace calculoFreteAPI.Services
         public static string applicationPath;
         public FreteService() { }
 
-        public string CalcularFrete(string uf)
+        public Result CalcularFrete(string uf)
         {
             var process = new Process()
             {
@@ -22,7 +23,10 @@ namespace calculoFreteAPI.Services
             };
 
             process.Start();
-            return process.StandardOutput.ReadToEnd();
+            float result;
+            if (float.TryParse(process.StandardOutput.ReadToEnd(), out result))
+                return new Result() { valorFrete = result};
+            return new Result() { valorFrete = -1 };
         }
     }
 }

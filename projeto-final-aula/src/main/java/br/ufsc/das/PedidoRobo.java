@@ -4,7 +4,7 @@ public class PedidoRobo extends PedidoPeca {
 
 	private static final long serialVersionUID = 1L;
 	
-	/*
+
 	private int qtdRoboDomestico;
     private int qtdRoboMedico;
     private int qtdRoboSeguranca;
@@ -33,24 +33,24 @@ public class PedidoRobo extends PedidoPeca {
     public void setQtdRoboSeguranca(int qtdRoboSeguranca) {
         this.qtdRoboSeguranca = qtdRoboSeguranca;
     }
-    */
+
 	
-    
+    /*
 	@Override
 	public String toString() {
 		return "PedidoRoboBean [getCliente()=" + getCliente() + ", getEndereco()=" + getEndereco() + ", getEstado()=" + getEstado()
 				+ ", getItens()=" + getItens() + ", getTotal()=" + getTotal() + "]";
 	}
+	*/
 	
-    
-	/*
+	
     @Override
 	public String toString() {
 		return "PedidoRoboBean [getCliente()=" + getCliente() + ", getEndereco()=" + getEndereco() + ", getEstado()=" + getEstado()
-				+ ", qRoboDomestico=" + qtdRoboDomestico
-				+ ", qRoboSeguranca=" + qtdRoboSeguranca 
-				+ ", qRoboMedico="+ qtdRoboMedico 
+				+ ", qtdRoboDomestico=" + qtdRoboDomestico
+				+ ", qtdRoboSeguranca=" + qtdRoboSeguranca 
+				+ ", qtdRoboMedico="+ qtdRoboMedico 
 				+ ", getTotal()=" + getTotal() + "]";
 	}
-	*/
+	
 }

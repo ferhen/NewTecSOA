@@ -20,6 +20,8 @@ public class Pedido implements Serializable {
 	private int qtdRoboMedico;
 	private int qtdReatorArk;
 	private int qtdReatorSolar;
+	
+	private float valorTotal; 
 
 	private Collection<PedidoPeca> pecas = new ArrayList<>();
 
@@ -110,6 +112,14 @@ public class Pedido implements Serializable {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+	
+	public float getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(float valorTotal) {
+		this.valorTotal = valorTotal;
+	}
 
 	@Override
 	public String toString() {
@@ -120,5 +130,4 @@ public class Pedido implements Serializable {
 				+ qtdRoboMedico + ", qReatorArk=" + qtdReatorArk
 				+ ", qReatorSolar=" + qtdReatorSolar + "]";
 	}
-
 }

@@ -14,10 +14,10 @@ public class TratarResultadoPedido {
 
 		sb.append("Cliente: " + pedido.getCliente() + "\n");
 		sb.append("CEP: " + pedido.getCep() + "\n");
-		sb.append("Endereço: " + pedido.getEndereco() + "\n");
+		sb.append("Endereï¿½o: " + pedido.getEndereco() + "\n");
 		sb.append("Estado: " + pedido.getEstado() + "\n");
 
-		sb.append("\nDetalhamento das Peças:\n----------------------------\n\n");
+		sb.append("\nDetalhamento das Peï¿½as:\n----------------------------\n\n");
 
 		double totalGeral = 0;
 
@@ -25,10 +25,10 @@ public class TratarResultadoPedido {
 
 			if (p instanceof PedidoReator) {
 				sb.append("Reator - StarkSystem\n");
-				sb.append("Código StarkSystem: " + p.getCodigo() + "\n");
+				sb.append("Cï¿½digo StarkSystem: " + p.getCodigo() + "\n");
 			} else if (p instanceof PedidoRobo) {
 				sb.append("Reator - BrRobotics\n");
-				sb.append("Código BrRobotics: " + p.getCodigo() + "\n");
+				sb.append("Cï¿½digo BrRobotics: " + p.getCodigo() + "\n");
 			}
 			sb.append("Cliente: " + p.getCliente() + "\n");
 			sb.append("Endereco: " + p.getEndereco() + "\n");
@@ -43,7 +43,10 @@ public class TratarResultadoPedido {
 		}
 
 		sb.append("\n----------------------------\n");
-		sb.append("Total Geral: " + totalGeral);
+		sb.append("Total Itens: " + totalGeral);
+		
+		sb.append("\n----------------------------\n");
+		sb.append("Total Geral: " + pedido.getValorTotal());
 
 		return sb.toString();
 	}

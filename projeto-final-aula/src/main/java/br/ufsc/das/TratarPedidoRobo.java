@@ -10,14 +10,11 @@ public class TratarPedidoRobo {
 		bean.setCliente(pedido.getCliente());
 		bean.setEndereco(pedido.getEndereco());
 		bean.setEstado(pedido.getEstado());
+		
+		bean.setQtdRoboDomestico(pedido.getqtdRoboDomestico());
+		bean.setQtdRoboMedico(pedido.getqtdRoboMedico());
+		bean.setQtdRoboSeguranca(pedido.getqtdRoboSeguranca());
 
-		int qtdRoboDomestico = pedido.getqtdRoboDomestico();
-		int qtdRoboSeguranca = pedido.getqtdRoboSeguranca();
-		int qtdRoboMedico = pedido.getqtdRoboMedico();
-
-		// populando a lista de itens
-
-		bean.setItens("Robo Domestico=" + qtdRoboDomestico + ";" + "Robo Seguranca=" + qtdRoboSeguranca + ";" + "Robo Medico=" + qtdRoboMedico);
 
 		return bean;
 	}
