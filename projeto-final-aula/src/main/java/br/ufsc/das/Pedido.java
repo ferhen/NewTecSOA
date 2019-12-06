@@ -24,6 +24,8 @@ public class Pedido implements Serializable {
 	private float valorTotal; 
 
 	private Collection<PedidoPeca> pecas = new ArrayList<>();
+	
+	public CartaoCredito cartao;
 
 	public String getCodigo() {
 		return codigo;

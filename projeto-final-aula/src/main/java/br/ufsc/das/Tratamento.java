@@ -51,7 +51,14 @@ public class Tratamento {
 		bean.setqtdRoboMedico(qtdRoboMedico);
 		bean.setqtdReatorArk(qtdReatorArk);
 		bean.setqtdReatorSolar(qtdReatorSolar);
-
+		
+		CartaoCredito cartao = new CartaoCredito();
+		cartao.CardNumber = params.get("CardNumber");
+		cartao.CardName = params.get("CardName");
+		cartao.ExpirationDate = params.get("ExpirationDate");
+		
+		bean.cartao = cartao;
+		
 		System.out.println("pedido=" + bean);
 
 		return bean;
