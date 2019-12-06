@@ -238,8 +238,15 @@ input::-webkit-inner-spin-button {
 			
 			<hr>
 			<div style="float: right;">
-				<input type="reset" value="Cancel" class="btn btn-outline-secondary">
-				<input type="submit" value="Realizar Pedido" class="btn btn-secondary"> 
+				<button type="reset" class="btn btn-outline-secondary" value="Cancel">
+					<span>Cancel</span>
+				</button>
+				<button type="submit" class="btn btn-secondary" value="Realizar Pedido" style="min-width: 133px;">
+					<span class="submit-text">Realizar Pedido</span>
+					<div class="spinner-border" role="status" style="display: none; width: 1em; height: 1em; margin-bottom: 1px;">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</button>
 			</div>
 		</form>
 
@@ -248,9 +255,7 @@ input::-webkit-inner-spin-button {
 		</footer>
 
 <!-- 
-<div class="spinner-border" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
+
  -->
 
 <script>
@@ -278,8 +283,12 @@ $(":submit").click(function(evt) {
 	if (sum == 0) {
 		 evt.preventDefault();
 		 alert("Pelo menos um produto deve ser selecionado!");
+		 return false;
 	}
-	//$(this).prop('disabled',true);
+	$(this).prop('disabled',true);
+	$("form").submit();
+	$(".spinner-border").show();
+	$(".submit-text").hide();
 });
 </script> 
 
